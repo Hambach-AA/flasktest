@@ -7,6 +7,7 @@ from PastDays import PastDays
 from Room import Room
 import sqlite3
 from datetime import datetime
+import pytz
 
 import subprocess
 
@@ -15,6 +16,8 @@ import time
 
 DATABASE = 'data.sqlite'
 app = Flask(__name__)
+
+Yek = pytz.timezone('Asia/Yekaterinburg')
 
 col = PastDays()
 
@@ -63,8 +66,8 @@ def hello_world():
 
     corpus = []
 
-    date = str(datetime.now())[:10]
-    time = int(str(datetime.now())[11:13]) * 60 + int(str(datetime.now())[14:16])
+    date = str(datetime.now(Yek))[:10]
+    time = int(str(datetime.now(Yek))[11:13]) * 60 + int(str(datetime.now(Yek))[14:16])
 
     silence = 15
 
@@ -95,14 +98,14 @@ def setData():
         flag = True
 
     if flag:
-        time = int(str(datetime.now())[11:13]) * 60 + int(str(datetime.now())[14:16])
+        time = int(str(datetime.now(Yek))[11:13]) * 60 + int(str(datetime.now(Yek))[14:16])
         cur = get_db().cursor()
 
         cur.execute("INSERT INTO data (number, temperature, humidity, date, time) VALUES (?, ?, ?, ?, ?)",
             [int(request.args['room']),
             float(request.args['tem']),
             float(request.args['hum']),
-            str(datetime.now())[:10],
+            str(datetime.now(Yek))[:10],
             time])
 
         get_db().commit()

@@ -1,13 +1,19 @@
 from calendar import Calendar
 from datetime import datetime
 
+import pytz
+
+
 class PastDays:
 
     def __init__(self):
 
-        self.year = int(str(datetime.now())[:4])
-        self.month = int(str(datetime.now())[5:7])
-        self.day = int(str(datetime.now())[8:10])
+        self.Yek = pytz.timezone('Asia/Yekaterinburg')
+
+        self.year = int(str(datetime.now(self.Yek))[:4])
+        self.month = int(str(datetime.now(self.Yek))[5:7])
+        self.day = int(str(datetime.now(self.Yek))[8:10])
+
 
         self.cal = Calendar(0)
 
