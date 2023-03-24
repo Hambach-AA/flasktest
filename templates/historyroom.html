@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href='/static/style.css'/>
+</head>
+<body>
+    <div class="parent">
+        <div>
+            <img src="{{ url_for("static", filename="1.png") }}" alt="ops image">
+        </div>
+        <div>
+            <img src="{{ url_for("static", filename="2.png") }}" alt="ops image">
+        </div>
+        <div>
+            <dl>
+            <dt>История</dt>
+            {% for i in history %}
+                <dd>
+                    <a href="/historyRoom/{{ i }}/{{ room }}">{{ i }}</a>
+                </dd>
+            {% endfor %}
+            </dl>
+        </div>
+    </div>
+    <form action="/">
+    <input type="submit" value="Назад" />
+    </form>
+
+
+
+
+</body>
+</html>

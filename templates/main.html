@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<H1>Информация по температуре и влажности</H1>
+
+<table border="1">
+   <tr>
+    <th>Корпус</th>
+    <th>Фиделио</th>
+    <th>Номер</th>
+    <th>Температура</th>
+    <th>Влажность</th>
+    <th>Дата</th>
+    <th>Время</th>
+   </tr>
+    {% for i in corpus %}
+        <tr>
+            <th>{{ i.corpus }}</th>
+            <th>{{ i.fidelio }}</th>
+            <th><a href="/historyRoom/{{ i.date }}/{{ i.room }}">{{ i.room }}</a></th>
+            <th>{{ i.tem }}</th>
+            <th>{{ i.hum }}</th>
+            <th bgcolor={{ i.color }}>{{ i.date }}</th>
+            <th bgcolor={{ i.color }}>{{ i.standartTime }}</th>
+        </tr>
+    {% endfor %}
+</table>
+
+<H2>Очистка истории</H2>
+<form action="/clearingHistory/">
+    <p><b>Укажите количество дней, которые необходимо оставить (начиная с сегодняшнего дня)</b></p>
+    <input type="number" min="0" name="numberDays" required >
+    <p><input type="submit" value="Отчистить историю"></p>
+</form>
+</body>
+</html>
